@@ -5,9 +5,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Container(
-        
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+        constraints: BoxConstraints.expand(),
       ),
     );
   }
