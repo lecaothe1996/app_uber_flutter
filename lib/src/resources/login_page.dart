@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SizedBox(
-                height: 10,
+                height: 100,
               ),
               Image.asset('ic_car_green.png', width: 196, height: 80),
               Padding(
@@ -35,26 +35,69 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 145, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
                 child: TextField(
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.mail_outlined),
                       labelText: 'Email',
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black, width: 1))),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 1))),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock_outline),
                       labelText: 'Password',
                       border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black, width: 1))),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 1))),
                 ),
               ),
-              Text('Forgot password?')
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                alignment: AlignmentDirectional.centerEnd,
+                child: Text(
+                  'Forgot password?',
+                  style: TextStyle(fontSize: 16, color: Color(0xff606470)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 29, 0, 0),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: RaisedButton(
+                    onPressed: ArgumentError.notNull,
+                    child: Text(
+                      'Log In',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                    color: Color(0xff3277D8),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(6))),
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      'New User?',
+                      style: TextStyle(fontSize: 16, color: Color(0xff606470)),
+                    ),
+                    Text(
+                      'Sign up for a new account',
+                      style: TextStyle(fontSize: 16, color: Color(0xff3277D8)),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
