@@ -1,4 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/resources/register_page.dart';
+
+
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -82,20 +86,25 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      'New User?',
-                      style: TextStyle(fontSize: 16, color: Color(0xff606470)),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'New User?',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xff606470),
                     ),
-                    Text(
-                      'Sign up for a new account',
-                      style: TextStyle(fontSize: 16, color: Color(0xff3277D8)),
-                    ),
-                  ],
+                    children: <TextSpan>[
+                      TextSpan(
+                        recognizer: TapGestureRecognizer() ..onTap = () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                        },
+                          text: '   Sign up for a new account',
+                          style: TextStyle(
+                              fontSize: 16, color: Color(0xff3277D8))),
+                    ],
+                  ),
                 ),
               ),
             ],
