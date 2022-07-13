@@ -94,10 +94,10 @@ class LoginPage extends StatelessWidget {
                     Text(
                       'Sign up for a new account',
                       style: TextStyle(fontSize: 16, color: Color(0xff3277D8)),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
