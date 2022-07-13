@@ -87,7 +87,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
                 child: RichText(
                   text: TextSpan(
                     text: 'New User?',

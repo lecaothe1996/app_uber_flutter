@@ -106,7 +106,7 @@ class RegisterPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
                 child: RichText(
                   text: TextSpan(
                     text: 'Already a User?',
@@ -118,8 +118,8 @@ class RegisterPage extends StatelessWidget {
                       },
                         text: '   Login now',
                         style: TextStyle(fontSize: 16, color: Color(0xff3277D8))
-                      )
-                    ]
+                      ),
+                    ],
                   ),
                 ),
               ),
