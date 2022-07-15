@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:uber_app/src/blocs/auth_bloc.dart';
+import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -121,22 +122,23 @@ class _RegisterPageState extends State<RegisterPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: StreamBuilder(
-                  stream: authBloc.passStream,
-                  builder: (context, snapshot) {
-                    return TextField(
-                      controller: _passController,
-                      textInputAction: TextInputAction.done,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        errorText: snapshot.hasError ? snapshot.error.toString() : null,
-                          prefixIcon: Icon(Icons.lock_outline),
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 1))),
-                    );
-                  }
-                ),
+                    stream: authBloc.passStream,
+                    builder: (context, snapshot) {
+                      return TextField(
+                        controller: _passController,
+                        textInputAction: TextInputAction.done,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            errorText: snapshot.hasError
+                                ? snapshot.error.toString()
+                                : null,
+                            prefixIcon: Icon(Icons.lock_outline),
+                            labelText: 'Password',
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 1))),
+                      );
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
@@ -185,10 +187,16 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _onSigUpClicked() {
-    var isValid = authBloc.isValid(
-        _nameController.text, _phoneController.text, _emailController.text, _passController.text);
+    var isValid = authBloc.isValid(_nameController.text, _phoneController.text,
+        _emailController.text, _passController.text);
     if (isValid) {
-      print('done');
+      // create sing up
+      authBloc.signUp(_emailController.text, _passController.text,
+          _phoneController.text, _nameController.text, () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      });
+      // print('done');
     }
   }
 }
