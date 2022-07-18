@@ -9,10 +9,14 @@ class MsgDialog {
               content: Text(msg),
               actions: [
                 FlatButton(
+                    color: Color(0xff3277D8),
                     onPressed: () {
                       Navigator.of(context).pop(MsgDialog);
                     },
-                    child: Text('OK')),
+                    child: Text(
+                      'OK',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    )),
               ],
             ));
   }

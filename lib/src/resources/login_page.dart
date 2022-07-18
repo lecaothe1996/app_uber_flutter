@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
             .push(MaterialPageRoute(builder: (context) => HomePage()));
       }, (msg) {
         LoadingDialog.hideLoadingDialog(context);
-        MsgDialog.showMsgDialog(context, 'Sign-In', msg);
+        MsgDialog.showMsgDialog(context, 'Log-In', msg);
       });
     }
   }

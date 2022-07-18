@@ -14,7 +14,7 @@ class LoadingDialog {
                   children: [
                     const CircularProgressIndicator(),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(1, 10, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                       child: Text(
                         msg,
                         style: const TextStyle(fontSize: 18),
