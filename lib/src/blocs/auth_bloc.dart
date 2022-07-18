@@ -51,6 +51,10 @@ class AuthBloc {
     _firAuthen.signUp(email, pass, name, phone, onSuccess, onRegisterError);
   }
 
+  void signIn(String email, String pass, Function onSuccess, Function(String) onSignInError) {
+    _firAuthen.signIn(email, pass, onSuccess, onSignInError);
+  }
+
   void dispose() {
     _nameController.close();
     _phoneController.close();

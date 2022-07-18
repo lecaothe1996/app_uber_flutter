@@ -21,7 +21,8 @@ class FirAuth {
     });
   }
 
-  _createUser(String userId, String name, String phone, Function onSuccess, Function(String) onRegisterError) {
+  _createUser(String userId, String name, String phone, Function onSuccess,
+      Function(String) onRegisterError) {
     var user = {'name': name, 'phone': phone};
     // ghi dữ liệu lên database
     var ref = FirebaseDatabase.instance.reference().child('users');
@@ -54,4 +55,15 @@ class FirAuth {
     }
   }
 
+  void signIn(String email, String pass, Function onSuccess,
+      Function(String) onSignInError) {
+    _firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: pass)
+        .then((user) {
+      print('on signin in success');
+      onSuccess();
+    }).catchError((err) {
+      onSignInError('Login fail, please try again');
+    });
+  }
 }

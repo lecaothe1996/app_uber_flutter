@@ -1,11 +1,23 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/app.dart';
+import 'package:uber_app/src/resources/dialog/loading_dialog.dart';
+import 'package:uber_app/src/resources/dialog/msg_dialog.dart';
+import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/register_page.dart';
+import '../blocs/auth_bloc.dart';
 
-
-
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final AuthBloc authBloc = AuthBloc();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,26 +52,42 @@ class LoginPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.mail_outlined),
-                      labelText: 'Email',
-                      border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black, width: 1))),
-                ),
+                child: StreamBuilder(
+                    stream: authBloc.emailStream,
+                    builder: (context, snapshot) {
+                      return TextField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                            errorText: snapshot.hasError
+                                ? snapshot.error.toString()
+                                : null,
+                            prefixIcon: Icon(Icons.mail_outlined),
+                            labelText: 'Email',
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 1))),
+                      );
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock_outline),
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black, width: 1))),
-                ),
+                child: StreamBuilder(
+                    stream: authBloc.passStream,
+                    builder: (context, snapshot) {
+                      return TextField(
+                        controller: _passController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            errorText: snapshot.hasError
+                                ? snapshot.error.toString()
+                                : null,
+                            prefixIcon: Icon(Icons.lock_outline),
+                            labelText: 'Password',
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.black, width: 1))),
+                      );
+                    }),
               ),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -75,7 +103,7 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   height: 48,
                   child: RaisedButton(
-                    onPressed: ArgumentError.notNull,
+                    onPressed: _onLoginClick,
                     child: Text(
                       'Log In',
                       style: TextStyle(fontSize: 20, color: Colors.white),
@@ -97,9 +125,13 @@ class LoginPage extends StatelessWidget {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        recognizer: TapGestureRecognizer() ..onTap = () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
-                        },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterPage()));
+                            },
                           text: '   Sign up for a new account',
                           style: TextStyle(
                               fontSize: 16, color: Color(0xff3277D8))),
@@ -112,5 +144,27 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onLoginClick() {
+    var isValid = authBloc.isValid(toString(), toString(), _emailController.text, _passController.text);
+
+    if (isValid) {
+      String email = _emailController.text;
+      String pass = _passController.text;
+
+      var authBloc = MyApp.of(context)?.authBloc;
+      // Hien pop-up loading...
+      LoadingDialog.showLoadingDialog(context, 'Loading...');
+      authBloc!.signIn(email, pass, () {
+        // an pop-up loding...
+        LoadingDialog.hideLoadingDialog(context);
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => HomePage()));
+      }, (msg) {
+        LoadingDialog.hideLoadingDialog(context);
+        MsgDialog.showMsgDialog(context, 'Sign-In', msg);
+      });
+    }
   }
 }
