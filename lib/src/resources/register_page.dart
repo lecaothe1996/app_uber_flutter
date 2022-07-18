@@ -30,9 +30,9 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Color(0xff3277D8)),
-        elevation: 0,
+        elevation: 0.0,
       ),
       body: Container(
         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),

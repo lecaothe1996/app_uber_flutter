@@ -60,7 +60,7 @@ class FirAuth {
     _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: pass)
         .then((user) {
-      print('========= on signin in success');
+      // print('========= on signin in success');
       onSuccess();
     }).catchError((err) {
       onSignInError('Login fail, please try again');

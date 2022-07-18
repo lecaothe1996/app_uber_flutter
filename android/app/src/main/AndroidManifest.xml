@@ -4,6 +4,9 @@
         android:label="uber_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDNWdUqfRyD5Cb4xDQOfivlB-yp_Q1zxbE"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
