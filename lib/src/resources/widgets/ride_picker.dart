@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/resources/ride_picker_page.dart';
 
 class RidePicker extends StatefulWidget {
   const RidePicker({Key? key}) : super(key: key);
@@ -30,6 +31,8 @@ class _RidePickerState extends State<RidePicker> {
             child: FlatButton(
               onPressed: () {
                 print('click location');
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => RidePickerPage()));
               },
               child: SizedBox(
                 width: double.infinity,
@@ -38,7 +41,7 @@ class _RidePickerState extends State<RidePicker> {
                   alignment: AlignmentDirectional.centerStart,
                   children: [
                     SizedBox(
-                      width: 40,
+                      width: 10,
                       height: 50,
                       child: Center(
                         child: Icon(Icons.location_on),
@@ -47,14 +50,14 @@ class _RidePickerState extends State<RidePicker> {
                     Positioned(
                       right: 0,
                       top: 0,
-                      width: 40,
+                      width: 20,
                       height: 50,
                       child: Center(
                         child: Icon(Icons.close, color: Colors.grey),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 40, right: 50),
+                      padding: EdgeInsets.only(left: 30),
                       child: Text(
                         '847a, Tạ Quang Bửu, P5, Q8, TP.HCM',
                         overflow: TextOverflow.ellipsis,
@@ -80,23 +83,24 @@ class _RidePickerState extends State<RidePicker> {
                   alignment: AlignmentDirectional.centerStart,
                   children: [
                     SizedBox(
-                      width: 40,
+                      width: 10,
                       height: 50,
                       child: Center(
-                        child: Icon(Icons.navigation_outlined, color: Colors.blue),
+                        child:
+                            Icon(Icons.navigation_outlined, color: Colors.blue),
                       ),
                     ),
                     Positioned(
                       right: 0,
                       top: 0,
-                      width: 40,
+                      width: 20,
                       height: 50,
                       child: Center(
                         child: Icon(Icons.close, color: Colors.grey),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 40, right: 50),
+                      padding: EdgeInsets.only(left: 30),
                       child: Text(
                         'Home',
                         overflow: TextOverflow.ellipsis,
