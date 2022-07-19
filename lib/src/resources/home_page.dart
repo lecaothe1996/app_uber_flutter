@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uber_app/src/resources/widgets/home_menu.dart';
+import 'package:uber_app/src/resources/widgets/ride_picker.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -42,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(Icons.menu, color: Colors.black),
                       onPressed: () {
                         print('Click menu');
+                        _scaffoldKey.currentState?.openDrawer();
                       },
                     ),
                     actions: <Widget>[
@@ -53,11 +56,18 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                    child: RidePicker(),
+                  ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+      drawer: Drawer(
+        child: HomeMenu(),
       ),
     );
   }
