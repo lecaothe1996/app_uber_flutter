@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ? snapshot.error.toString()
                                 : null,
                             prefixIcon: const Icon(
-                                Icons.supervised_user_circle_outlined),
+                                Icons.person_outline),
                             labelText: 'Name',
                             border: const OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -93,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
                                 : null,
-                            prefixIcon: const Icon(Icons.phone),
+                            prefixIcon: const Icon(Icons.phone_outlined),
                             labelText: 'Phone Number',
                             border: const OutlineInputBorder(
                                 borderSide: const BorderSide(

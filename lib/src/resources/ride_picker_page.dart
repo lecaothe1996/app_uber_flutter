@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/blocs/place_bloc.dart';
 
 class RidePickerPage extends StatefulWidget {
   const RidePickerPage({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class RidePickerPage extends StatefulWidget {
 
 class _RidePickerPageState extends State<RidePickerPage> {
   var _addRessController;
+  var placeBloc = PlaceBloc();
 
   @override
   void initState() {
@@ -60,7 +62,9 @@ class _RidePickerPageState extends State<RidePickerPage> {
                         child: TextField(
                           controller: _addRessController,
                           textInputAction: TextInputAction.search,
-                          onSubmitted: (str) {},
+                          onSubmitted: (str) {
+                            placeBloc.searchPlace(str);
+                          },
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
                       )

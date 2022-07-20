@@ -17,7 +17,7 @@ class _HomeMenuState extends State<HomeMenu> {
           leading: Padding(
             padding: EdgeInsets.only(left: 15),
             child: Icon(
-              Icons.supervised_user_circle,
+              Icons.person_outline,
               color: Colors.blue,
             ),
           ),
