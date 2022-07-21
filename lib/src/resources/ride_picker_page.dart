@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/blocs/place_bloc.dart';
 
+import '../model/place_item_res.dart';
+
 class RidePickerPage extends StatefulWidget {
   const RidePickerPage({Key? key}) : super(key: key);
 
@@ -73,6 +75,43 @@ class _RidePickerPageState extends State<RidePickerPage> {
                 ),
               ),
             ),
+            // Container(
+            //   padding: EdgeInsets.only(top: 20),
+            //   child: StreamBuilder(
+            //       stream: placeBloc.placeStream,
+            //       builder: (context, snapshot) {
+            //         if (snapshot.hasData) {
+            //           print('-------------');
+            //           print('---------the:'+snapshot.data.toString());
+            //           if (snapshot.data == "start") {
+            //             return Center(
+            //               child: CircularProgressIndicator(),
+            //             );
+            //           }
+            //
+            //           print(snapshot.data.toString());
+            //           List<PlaceItemRes> places = snapshot.data;
+            //           return ListView.separated(
+            //               shrinkWrap: true,
+            //               itemBuilder: (context, index) {
+            //                 return ListTile(
+            //                   title: Text(places.elementAt(index).name),
+            //                   subtitle: Text(places.elementAt(index).address),
+            //                   onTap: () {
+            //                     print("on tap");
+            //                   },
+            //                 );
+            //               },
+            //               separatorBuilder: (context, index) => Divider(
+            //                     height: 1,
+            //                     color: Color(0xfff5f5f5),
+            //                   ),
+            //               itemCount: places.length);
+            //         } else {
+            //           return Container();
+            //         }
+            //       }),
+            // ),
           ],
         ),
       ),

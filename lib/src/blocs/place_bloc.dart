@@ -12,8 +12,10 @@ class PlaceBloc {
     _placeController.sink.add("start");
     PlaceService.searchPlace(keyword).then((rs) {
       _placeController.sink.add(rs);
-    }).catchError(() {
-//      _placeController.sink.add("stop");
+    }).catchError((Object error) {
+     // _placeController.sink.add("stop");
+      print('loiiiiiiiiiiiiiiiii');
+      // return null;
     });
   }
 
