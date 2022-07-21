@@ -32,7 +32,7 @@ class _RidePickerPageState extends State<RidePickerPage> {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: Container(
                   width: double.infinity,
                   height: 60,
@@ -69,49 +69,55 @@ class _RidePickerPageState extends State<RidePickerPage> {
                           },
                           style: TextStyle(fontSize: 16, color: Colors.black),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            // Container(
-            //   padding: EdgeInsets.only(top: 20),
-            //   child: StreamBuilder(
-            //       stream: placeBloc.placeStream,
-            //       builder: (context, snapshot) {
-            //         if (snapshot.hasData) {
-            //           print('-------------');
-            //           print('---------the:'+snapshot.data.toString());
-            //           if (snapshot.data == "start") {
-            //             return Center(
-            //               child: CircularProgressIndicator(),
-            //             );
-            //           }
-            //
-            //           print(snapshot.data.toString());
-            //           List<PlaceItemRes> places = snapshot.data;
-            //           return ListView.separated(
-            //               shrinkWrap: true,
-            //               itemBuilder: (context, index) {
-            //                 return ListTile(
-            //                   title: Text(places.elementAt(index).name),
-            //                   subtitle: Text(places.elementAt(index).address),
-            //                   onTap: () {
-            //                     print("on tap");
-            //                   },
-            //                 );
-            //               },
-            //               separatorBuilder: (context, index) => Divider(
-            //                     height: 1,
-            //                     color: Color(0xfff5f5f5),
-            //                   ),
-            //               itemCount: places.length);
-            //         } else {
-            //           return Container();
-            //         }
-            //       }),
-            // ),
+            Expanded(
+              child: Container(
+                color: Color(0xffF6F6F6),
+                padding: EdgeInsets.only(top: 0),
+                child: StreamBuilder<List<PlaceItemRes>>(
+                    stream: placeBloc.placeStream,
+                    builder: (context, snapshot) {
+                      print('snapshot:');
+                      print(snapshot.data.toString());
+                      if (snapshot.hasData) {
+                        if ((snapshot.data?.length ?? 0) < 1) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        print('snapshot: 2');
+                        print(snapshot.data);
+                        // List<PlaceItemRes> places = snapshot.data;
+                        List<PlaceItemRes>? places = snapshot.data;
+                        return ListView.separated(
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(places?.elementAt(index).name ?? ""),
+                                subtitle: Text(places?.elementAt(index).address ?? ""),
+                                onTap: () {
+                                  print("on tap");
+                                },
+                              );
+                            },
+                            separatorBuilder: (context, index) => Divider(
+                                  height: 1,
+                                  color: Color(0xff000000),
+                                ),
+                            itemCount: places?.length ?? 0
+                        );
+                      } else {
+                        return Container(
+                        );
+                      }
+                    }),
+              ),
+            ),
           ],
         ),
       ),

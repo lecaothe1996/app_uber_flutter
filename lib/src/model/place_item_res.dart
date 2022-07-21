@@ -9,10 +9,8 @@ class PlaceItemRes {
 
   static List<PlaceItemRes> fromJson(Map<String, dynamic> json) {
     List<PlaceItemRes> rs = [];
-    print("parse data");
-    print(rs[1]);
-
     var results = json['results'] as List;
+    // print("results -----");
     for (var item in results) {
       var p = new PlaceItemRes(
           item['name'] as String,
@@ -21,10 +19,9 @@ class PlaceItemRes {
           item['geometry']['location']['lng']as double);
 
       rs.add(p);
-      print('list parse');
-      print(rs[1]);
     }
 
     return rs;
   }
 }
+
