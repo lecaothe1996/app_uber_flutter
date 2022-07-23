@@ -4,7 +4,10 @@ import 'package:uber_app/src/blocs/place_bloc.dart';
 import '../model/place_item_res.dart';
 
 class RidePickerPage extends StatefulWidget {
-  const RidePickerPage({Key? key}) : super(key: key);
+  final String selectedAddress;
+  final Function(PlaceItemRes, bool) onSelected;
+  final bool _isFromAddress;
+  RidePickerPage(this.selectedAddress, this.onSelected, this._isFromAddress);
 
   @override
   State<RidePickerPage> createState() => _RidePickerPageState();
@@ -16,7 +19,7 @@ class _RidePickerPageState extends State<RidePickerPage> {
 
   @override
   void initState() {
-    _addRessController = TextEditingController(text: '');
+    _addRessController = TextEditingController(text: widget.selectedAddress);
     super.initState();
   }
 
@@ -98,10 +101,13 @@ class _RidePickerPageState extends State<RidePickerPage> {
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                title: Text(places?.elementAt(index).name ?? ""),
-                                subtitle: Text(places?.elementAt(index).address ?? ""),
+                                title: Text(places!.elementAt(index).name),
+                                subtitle: Text(places.elementAt(index).address),
                                 onTap: () {
-                                  print("on tap");
+                                  print("click ListTile");
+                                  Navigator.of(context).pop();
+                                  widget.onSelected(places.elementAt(index),
+                                      widget._isFromAddress);
                                 },
                               );
                             },

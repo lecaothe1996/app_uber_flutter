@@ -3,6 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uber_app/src/resources/widgets/home_menu.dart';
 import 'package:uber_app/src/resources/widgets/ride_picker.dart';
 
+import '../model/place_item_res.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                       padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-                    child: RidePicker(),
+                    child: RidePicker(onPlaceSelected),
                   ),
                 ],
               ),
@@ -70,5 +72,9 @@ class _HomePageState extends State<HomePage> {
         child: HomeMenu(),
       ),
     );
+  }
+
+  void onPlaceSelected(PlaceItemRes place, bool fromAddress) {
+    var mkId = fromAddress ? "from_address" : "to_address";
   }
 }
