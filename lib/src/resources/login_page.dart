@@ -61,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context, snapshot) {
                       return TextField(
                         controller: _emailController,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()

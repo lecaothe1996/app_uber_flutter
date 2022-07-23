@@ -70,7 +70,7 @@ class _RidePickerState extends State<RidePicker> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 30),
+                      padding: EdgeInsets.only(left: 30, right: 15),
                       child: Text(
                         // '847a, Tạ Quang Bửu, P5, Q8, TP.HCM',
                         fromAddress == null ? "From" : fromAddress!.name,
@@ -122,7 +122,7 @@ class _RidePickerState extends State<RidePicker> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 30),
+                      padding: EdgeInsets.only(left: 30, right: 15),
                       child: Text(
                         // 'Home',
                         toAddress == null ? "To" : toAddress!.name,
