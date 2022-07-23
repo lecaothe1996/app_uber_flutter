@@ -15,6 +15,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //hide password
+  bool _obscureText = true;
+
+  //
   final AuthBloc authBloc = AuthBloc();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
@@ -76,12 +80,23 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context, snapshot) {
                       return TextField(
                         controller: _passController,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
                                 : null,
                             prefixIcon: Icon(Icons.lock_outline),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                // print('click pass');
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              child: Icon(_obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                            ),
                             labelText: 'Password',
                             border: OutlineInputBorder(
                                 borderSide:
@@ -147,7 +162,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onLoginClick() {
-    var isValid = authBloc.isValid(toString(), toString(), _emailController.text, _passController.text);
+    var isValid = authBloc.isValid(
+        toString(), toString(), _emailController.text, _passController.text);
 
     if (isValid) {
       String email = _emailController.text;

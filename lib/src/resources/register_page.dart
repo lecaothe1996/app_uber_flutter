@@ -14,6 +14,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  //show password
+  bool _obscureText = true;
+
+  //
   final AuthBloc authBloc = AuthBloc();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -71,8 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
                                 : null,
-                            prefixIcon: const Icon(
-                                Icons.person_outline),
+                            prefixIcon: const Icon(Icons.person_outline),
                             labelText: 'Name',
                             border: const OutlineInputBorder(
                                 borderSide: const BorderSide(
@@ -129,12 +132,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       return TextField(
                         controller: _passController,
                         textInputAction: TextInputAction.done,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
                                 : null,
                             prefixIcon: const Icon(Icons.lock_outline),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              },
+                              child: Icon(_obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                            ),
                             labelText: 'Password',
                             border: const OutlineInputBorder(
                                 borderSide:
