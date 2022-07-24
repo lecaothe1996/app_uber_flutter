@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/resources/login_page.dart';
+
+import '../utils/PreferenceUtils.dart';
 
 class HomeMenu extends StatefulWidget {
   const HomeMenu({Key? key}) : super(key: key);
@@ -94,6 +97,11 @@ class _HomeMenuState extends State<HomeMenu> {
           ),
         ),
         ListTile(
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LoginPage()));
+            PreferenceUtils.clearData();
+          },
           leading: Padding(
             padding: const EdgeInsets.only(left: 15),
             child: Icon(

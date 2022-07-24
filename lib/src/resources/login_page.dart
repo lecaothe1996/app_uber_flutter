@@ -1,10 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uber_app/src/app.dart';
 import 'package:uber_app/src/resources/dialog/loading_dialog.dart';
 import 'package:uber_app/src/resources/dialog/msg_dialog.dart';
 import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/register_page.dart';
+import 'package:uber_app/src/resources/utils/PreferenceUtils.dart';
 import '../blocs/auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,11 +20,22 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   //hide password
   bool _obscureText = true;
-
   //
   final AuthBloc authBloc = AuthBloc();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
+
+  @override
+  void dispose() {
+    authBloc.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    PreferenceUtils.init();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,8 +188,11 @@ class _LoginPageState extends State<LoginPage> {
       // Hien pop-up loading...
       LoadingDialog.showLoadingDialog(context, 'Loading...');
       authBloc!.signIn(email, pass, () {
+        // shared data
+        PreferenceUtils.setBool(PreferenceUtils.keyIsLogin, true);
         // an pop-up loding...
         LoadingDialog.hideLoadingDialog(context);
+        Navigator.pop(context);
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => HomePage()));
       }, (msg) {
@@ -184,4 +201,7 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
+
+
 }
+

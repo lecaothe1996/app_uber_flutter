@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/blocs/place_bloc.dart';
 
@@ -7,6 +9,7 @@ class RidePickerPage extends StatefulWidget {
   final String selectedAddress;
   final Function(PlaceItemRes, bool) onSelected;
   final bool _isFromAddress;
+
   RidePickerPage(this.selectedAddress, this.onSelected, this._isFromAddress);
 
   @override
@@ -46,7 +49,10 @@ class _RidePickerPageState extends State<RidePickerPage> {
                         width: 40,
                         height: 60,
                         child: Center(
-                          child: Icon(Icons.location_on),
+                          child: widget._isFromAddress
+                              ? Icon(Icons.navigation_outlined,
+                                  color: Colors.blue)
+                              : Icon(Icons.location_on),
                         ),
                       ),
                       Positioned(
@@ -115,11 +121,9 @@ class _RidePickerPageState extends State<RidePickerPage> {
                                   height: 1,
                                   color: Color(0xff000000),
                                 ),
-                            itemCount: places?.length ?? 0
-                        );
+                            itemCount: places?.length ?? 0);
                       } else {
-                        return Container(
-                        );
+                        return Container();
                       }
                     }),
               ),

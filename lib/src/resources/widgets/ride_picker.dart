@@ -57,7 +57,7 @@ class _RidePickerState extends State<RidePicker> {
                       width: 10,
                       height: 50,
                       child: Center(
-                        child: Icon(Icons.location_on),
+                        child: Icon(Icons.navigation_outlined, color: Colors.blue),
                       ),
                     ),
                     Positioned(
@@ -109,7 +109,7 @@ class _RidePickerState extends State<RidePicker> {
                       height: 50,
                       child: Center(
                         child:
-                            Icon(Icons.navigation_outlined, color: Colors.blue),
+                            Icon(Icons.location_on),
                       ),
                     ),
                     Positioned(
