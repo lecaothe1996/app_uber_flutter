@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/resources/login_page.dart';
-
-import '../utils/PreferenceUtils.dart';
+import '../../blocs/PreferenceUtils.dart';
 
 class HomeMenu extends StatefulWidget {
   const HomeMenu({Key? key}) : super(key: key);

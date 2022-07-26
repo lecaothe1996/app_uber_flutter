@@ -1,8 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
+// remember password
 class PreferenceUtils {
-
-  static Future<SharedPreferences> get _instance async => _prefsInstance ??= await SharedPreferences.getInstance();
+  static Future<SharedPreferences> get _instance async =>
+      _prefsInstance ??= await SharedPreferences.getInstance();
   static SharedPreferences? _prefsInstance;
 
   static String keyIsLogin = "log_in";
@@ -10,7 +11,7 @@ class PreferenceUtils {
   // call this method from iniState() function of mainApp().
   static Future<SharedPreferences?> init() async {
     _prefsInstance = await _instance;
-    return _prefsInstance ??  await SharedPreferences.getInstance();
+    return _prefsInstance ?? await SharedPreferences.getInstance();
   }
 
   static String getString(String key, [String? defValue]) {
@@ -33,6 +34,5 @@ class PreferenceUtils {
 
   static void clearData() {
     _prefsInstance?.clear();
-
   }
 }

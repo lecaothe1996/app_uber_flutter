@@ -1,13 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uber_app/src/app.dart';
 import 'package:uber_app/src/resources/dialog/loading_dialog.dart';
 import 'package:uber_app/src/resources/dialog/msg_dialog.dart';
 import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/register_page.dart';
-import 'package:uber_app/src/resources/utils/PreferenceUtils.dart';
+import '../blocs/PreferenceUtils.dart';
 import '../blocs/auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {

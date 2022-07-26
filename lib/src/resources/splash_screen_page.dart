@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/blocs/PreferenceUtils.dart';
 import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/login_page.dart';
-import 'package:uber_app/src/resources/utils/PreferenceUtils.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
