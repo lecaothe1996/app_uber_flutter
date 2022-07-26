@@ -52,14 +52,14 @@ class _RegisterPageState extends State<RegisterPage> {
               const Padding(
                 padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: Text(
-                  'Welcome Aboard!',
+                  'Chào Mừng Đến Với iCab!',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
                 child: const Text(
-                  'Signup with iCab in simple steps',
+                  'Đăng ký với iCab bằng các bước đơn giản',
                   style: TextStyle(fontSize: 16, color: Color(0xff606470)),
                 ),
               ),
@@ -76,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ? snapshot.error.toString()
                                 : null,
                             prefixIcon: const Icon(Icons.person_outline),
-                            labelText: 'Name',
+                            labelText: 'Họ Và Tên',
                             border: const OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     color: Colors.black, width: 1))),
@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ? snapshot.error.toString()
                                 : null,
                             prefixIcon: const Icon(Icons.phone_outlined),
-                            labelText: 'Phone Number',
+                            labelText: 'Số Điện Thoại',
                             border: const OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     color: Colors.black, width: 1))),
@@ -148,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ? Icons.visibility_off
                                   : Icons.visibility),
                             ),
-                            labelText: 'Password',
+                            labelText: 'Mật Khẩu',
                             border: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.black, width: 1))),
@@ -163,7 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: RaisedButton(
                     onPressed: _onSigUpClicked,
                     child: const Text(
-                      'Sign up',
+                      'Đăng Ký',
                       style: const TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     color: const Color(0xff3277D8),
@@ -176,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
                 child: RichText(
                   text: TextSpan(
-                    text: 'Already a User?',
+                    text: 'Đã là người dùng?',
                     style: const TextStyle(
                         fontSize: 16, color: const Color(0xff606470)),
                     children: <TextSpan>[
@@ -188,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   MaterialPageRoute(
                                       builder: (context) => LoginPage()));
                             },
-                          text: '   Login now',
+                          text: ' Đăng nhập ngay bây giờ',
                           style: const TextStyle(
                               fontSize: 16, color: const Color(0xff3277D8))),
                     ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uber_app/src/resources/widgets/home_menu.dart';
 import 'package:uber_app/src/resources/widgets/ride_picker.dart';
-
 import '../model/place_item_res.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                     elevation: 0.0,
                     centerTitle: true,
                     title: Text(
-                      'Uber App',
+                      'iCab',
                       style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                     leading: IconButton(

@@ -24,7 +24,7 @@ class _HomeMenuState extends State<HomeMenu> {
             ),
           ),
           title: Text(
-            'My Profile',
+            'Thông tin của tôi',
             style: TextStyle(
               fontSize: 18,
               color: Color(0xff323643)
@@ -40,7 +40,7 @@ class _HomeMenuState extends State<HomeMenu> {
             ),
           ),
           title: Text(
-            'Ride History',
+            'Lịch sử đi xe',
             style: TextStyle(
                 fontSize: 18,
                 color: Color(0xff323643)
@@ -56,7 +56,7 @@ class _HomeMenuState extends State<HomeMenu> {
             ),
           ),
           title: Text(
-            'Offers',
+            'Ưu đãi',
             style: TextStyle(
                 fontSize: 18,
                 color: Color(0xff323643)
@@ -72,7 +72,7 @@ class _HomeMenuState extends State<HomeMenu> {
             ),
           ),
           title: Text(
-            'Notifications',
+            'Thông báo',
             style: TextStyle(
                 fontSize: 18,
                 color: Color(0xff323643)
@@ -88,7 +88,7 @@ class _HomeMenuState extends State<HomeMenu> {
             ),
           ),
           title: Text(
-            'Help & Support',
+            'Trợ giúp & Hỗ trợ',
             style: TextStyle(
                 fontSize: 18,
                 color: Color(0xff323643)
@@ -109,7 +109,7 @@ class _HomeMenuState extends State<HomeMenu> {
             ),
           ),
           title: Text(
-            'Logout',
+            'Đăng xuất',
             style: TextStyle(
                 fontSize: 18,
                 color: Color(0xff323643)

@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                 child: Text(
-                  'Welcome Back',
+                  'Chào Mừng Trở Lại',
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 11, 0, 0),
                 child: Text(
-                  'Login to continue using iCab',
+                  'Đăng nhập để tiếp tục sử dụng iCab',
                   style: TextStyle(fontSize: 16, color: Color(0xff606470)),
                 ),
               ),
@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ? Icons.visibility_off
                                   : Icons.visibility),
                             ),
-                            labelText: 'Password',
+                            labelText: 'Mật khẩu',
                             border: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.black, width: 1))),
@@ -122,8 +122,8 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 alignment: AlignmentDirectional.centerEnd,
                 child: Text(
-                  'Forgot password?',
-                  style: TextStyle(fontSize: 16, color: Color(0xff606470)),
+                  'Quên mật khẩu?',
+                  style: TextStyle(fontSize: 16, color: Color(0xff3277D8)),
                 ),
               ),
               Padding(
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: RaisedButton(
                     onPressed: _onLoginClick,
                     child: Text(
-                      'Log In',
+                      'Đăng Nhập',
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     color: Color(0xff3277D8),
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
                 child: RichText(
                   text: TextSpan(
-                    text: 'New User?',
+                    text: 'Người dùng mới?',
                     style: TextStyle(
                       fontSize: 16,
                       color: Color(0xff606470),
@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                                   MaterialPageRoute(
                                       builder: (context) => RegisterPage()));
                             },
-                          text: '   Sign up for a new account',
+                          text: ' Đăng ký một tài khoản mới',
                           style: TextStyle(
                               fontSize: 16, color: Color(0xff3277D8))),
                     ],

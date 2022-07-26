@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/blocs/place_bloc.dart';
-
 import '../model/place_item_res.dart';
 
 class RidePickerPage extends StatefulWidget {
@@ -52,7 +49,7 @@ class _RidePickerPageState extends State<RidePickerPage> {
                           child: widget._isFromAddress
                               ? Icon(Icons.navigation_outlined,
                                   color: Colors.blue)
-                              : Icon(Icons.location_on),
+                              : Icon(Icons.location_on, color: Colors.red),
                         ),
                       ),
                       Positioned(
