@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/resources/login_page.dart';
-import '../../app.dart';
-import '../../blocs/auth_bloc.dart';
-import '../dialog/loading_dialog.dart';
-import '../dialog/msg_dialog.dart';
+
+import '../app.dart';
+import '../blocs/auth_bloc.dart';
+import 'dialog/loading_dialog.dart';
+import 'dialog/msg_dialog.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -25,7 +26,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Color(0xff3277D8)),
+        elevation: 0.0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -33,8 +38,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           children: [
             Text(
               'Nhập email của bạn và chúng tôi sẽ gửi cho bạn một liên kết đặt lại mật khẩu',
-              style: TextStyle(fontSize: 18, color: Colors.black),
+              style: TextStyle(
+                height: 1.5,
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
+              // textScaleFactor: 1,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -89,12 +99,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       var authBloc = MyApp.of(context)?.authBloc;
       // Hien pop-up loading...
       LoadingDialog.showLoadingDialog(context, 'Loading...');
-      authBloc!.resetPass(email, () {
+      authBloc!.resetPass(email, (onSuccess) {
         // An pop-up loading...
         LoadingDialog.hideLoadingDialog(context);
-        Navigator.pop(context);
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => LoginPage()));
+        MsgDialog.showMsgDialog(context, 'Thông báo', onSuccess);
+        _emailController.text = '';
+        // Navigator.pop(context);
+        // Navigator.of(context)
+        //     .push(MaterialPageRoute(builder: (context) => LoginPage()));
       }, (msg) {
         LoadingDialog.hideLoadingDialog(context);
         MsgDialog.showMsgDialog(context, 'Thông báo', msg);

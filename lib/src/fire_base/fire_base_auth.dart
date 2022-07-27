@@ -39,16 +39,16 @@ class FirAuth {
     switch (code) {
       case 'invalid-email':
       case 'ERROR_INVALID_CREDENTIAL':
-        onRegisterError('Invalid email');
+        onRegisterError('Email không hợp lệ');
         break;
       case 'email-already-in-use':
-        onRegisterError('Email has existed');
+        onRegisterError('Email đã tồn tại');
         break;
       case 'weak-password':
-        onRegisterError('The password is not strong enough');
+        onRegisterError('Mật khẩu không đủ mạnh');
         break;
       default:
-        onRegisterError('Signup fail, please try again 11');
+        onRegisterError('Đăng ký không thành công, vui lòng thử lại');
         break;
     }
   }
@@ -61,7 +61,7 @@ class FirAuth {
       // print('========= on signin in success');
       onSuccess();
     }).catchError((err) {
-      onSignInError('Đăng nhập không thành công, vui lòng thử lại.');
+      onSignInError('Email hoặc mật khẩu không đúng, vui lòng thử lại.');
     });
   }
 
@@ -70,12 +70,12 @@ class FirAuth {
     await _firebaseAuth.sendPasswordResetEmail(email: email.trim()).then((user) {
       // print('========= on resetPass in success');
 
-      onSuccess();
+      onSuccess('Liên kết đặt lại mật khẩu đã được gửi! Kiểm tra Email của bạn.');
     }).catchError((err) {
       onForgotPasswordError('Email không đúng, vui lòng thử lại.');
     });
 
-    print('========= on resetPass in success');
-    print('$email');
+    // print('========= on resetPass in success');
+    // print('$email');
   }
 }

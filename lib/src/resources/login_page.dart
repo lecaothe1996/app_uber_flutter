@@ -8,7 +8,7 @@ import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/register_page.dart';
 import '../blocs/PreferenceUtils.dart';
 import '../blocs/auth_bloc.dart';
-import 'widgets/forgot_password_page.dart';
+import 'forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   //hide password
   bool _obscureText = true;
-
   //
   final AuthBloc authBloc = AuthBloc();
   final TextEditingController _emailController = TextEditingController();
@@ -207,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
             .push(MaterialPageRoute(builder: (context) => HomePage()));
       }, (msg) {
         LoadingDialog.hideLoadingDialog(context);
-        MsgDialog.showMsgDialog(context, 'Log-In', msg);
+        MsgDialog.showMsgDialog(context, 'Thông báo', msg);
       });
     }
   }

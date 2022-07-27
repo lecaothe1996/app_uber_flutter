@@ -6,6 +6,8 @@ import 'package:uber_app/src/resources/dialog/msg_dialog.dart';
 import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/login_page.dart';
 
+import '../blocs/PreferenceUtils.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
@@ -28,6 +30,12 @@ class _RegisterPageState extends State<RegisterPage> {
   void dispose() {
     authBloc.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    PreferenceUtils.init();
+    super.initState();
   }
 
   @override
@@ -211,6 +219,8 @@ class _RegisterPageState extends State<RegisterPage> {
       // create sing up
       authBloc.signUp(_emailController.text, _passController.text,
           _phoneController.text, _nameController.text, () {
+        // Luu thong tin dang nhap
+        PreferenceUtils.setBool(PreferenceUtils.keyIsLogin, true);
         // hide loading dialog
         LoadingDialog.hideLoadingDialog(context);
         Navigator.push(
@@ -219,7 +229,7 @@ class _RegisterPageState extends State<RegisterPage> {
         // hide loading dialog
         LoadingDialog.hideLoadingDialog(context);
         // show msg dialog
-        MsgDialog.showMsgDialog(context, 'Sign-In', msg);
+        MsgDialog.showMsgDialog(context, 'Thông báo', msg);
       });
       // print('done');
     }
