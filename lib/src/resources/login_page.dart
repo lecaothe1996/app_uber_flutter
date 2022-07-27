@@ -8,6 +8,7 @@ import 'package:uber_app/src/resources/home_page.dart';
 import 'package:uber_app/src/resources/register_page.dart';
 import '../blocs/PreferenceUtils.dart';
 import '../blocs/auth_bloc.dart';
+import 'widgets/forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   //hide password
   bool _obscureText = true;
+
   //
   final AuthBloc authBloc = AuthBloc();
   final TextEditingController _emailController = TextEditingController();
@@ -121,9 +123,18 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 alignment: AlignmentDirectional.centerEnd,
-                child: Text(
-                  'Quên mật khẩu?',
-                  style: TextStyle(fontSize: 16, color: Color(0xff3277D8)),
+                child: GestureDetector(
+                  onTap: () {
+                    print('Click quên mật khẩu?');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage()));
+                  },
+                  child: Text(
+                    'Quên mật khẩu?',
+                    style: TextStyle(fontSize: 16, color: Color(0xff3277D8)),
+                  ),
                 ),
               ),
               Padding(
@@ -187,9 +198,9 @@ class _LoginPageState extends State<LoginPage> {
       // Hien pop-up loading...
       LoadingDialog.showLoadingDialog(context, 'Loading...');
       authBloc!.signIn(email, pass, () {
-        // shared data
+        // Luu thong tin dang nhap
         PreferenceUtils.setBool(PreferenceUtils.keyIsLogin, true);
-        // an pop-up loding...
+        // An pop-up loading...
         LoadingDialog.hideLoadingDialog(context);
         Navigator.pop(context);
         Navigator.of(context)
@@ -200,7 +211,4 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
-
-
 }
-

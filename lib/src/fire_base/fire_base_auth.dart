@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -63,7 +61,21 @@ class FirAuth {
       // print('========= on signin in success');
       onSuccess();
     }).catchError((err) {
-      onSignInError('Login fail, please try again');
+      onSignInError('Đăng nhập không thành công, vui lòng thử lại.');
     });
+  }
+
+  Future resetPass(String email, Function onSuccess,
+      Function(String) onForgotPasswordError) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email.trim()).then((user) {
+      // print('========= on resetPass in success');
+
+      onSuccess();
+    }).catchError((err) {
+      onForgotPasswordError('Email không đúng, vui lòng thử lại.');
+    });
+
+    print('========= on resetPass in success');
+    print('$email');
   }
 }

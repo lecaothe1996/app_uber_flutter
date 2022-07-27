@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uber_app/src/fire_base/fire_base_auth.dart';
 
 class AuthBloc {
@@ -55,10 +54,15 @@ class AuthBloc {
     _firAuthen.signIn(email, pass, onSuccess, onSignInError);
   }
 
+  void resetPass(String email, Function onSuccess, Function(String) onForgotPasswordError) {
+    _firAuthen.resetPass(email, onSuccess, onForgotPasswordError);
+  }
+
   void dispose() {
     _nameController.close();
     _phoneController.close();
     _emailController.close();
     _passController.close();
   }
+
 }
