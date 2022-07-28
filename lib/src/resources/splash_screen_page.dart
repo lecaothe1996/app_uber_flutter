@@ -32,12 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.blue,
+        color: Colors.white,
         child: Center(
-          child: Text(
-            'App Uber',
-            style: TextStyle(fontSize: 40, color: Colors.white),
-          ),
+          child: Image.asset('ic_iCab.png', width: 250),
         ),
       ),
     );

@@ -19,25 +19,25 @@ class AuthBloc {
 
   bool isValid(String name, String phone, String email, String pass) {
     if (name == null || name.length == 0) {
-      _nameController.sink.addError('Enter name');
+      _nameController.sink.addError('Nhập Họ Và Tên');
       return false;
     }
     _nameController.sink.add('OK');
 
     if (phone == null || phone.length == 0) {
-      _phoneController.sink.addError('Enter phone');
+      _phoneController.sink.addError('Nhập Số Điện Thoại');
       return false;
     }
     _phoneController.sink.add('OK');
 
     if (email == null || email.length == 0) {
-      _emailController.sink.addError('Enter email');
+      _emailController.sink.addError('Nhập Email');
       return false;
     }
     _emailController.sink.add('OK');
 
     if (pass == null || pass.length < 6) {
-      _passController.sink.addError('Password over 5 characters');
+      _passController.sink.addError('Mật khẩu trên 6 ký tự');
       return false;
     }
     _passController.sink.add('OK');

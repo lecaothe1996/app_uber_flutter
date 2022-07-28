@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
         constraints: BoxConstraints.expand(),
         color: Colors.white,
         child: SingleChildScrollView(
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: StreamBuilder(
                     stream: authBloc.emailStream,
                     builder: (context, snapshot) {
@@ -195,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
 
       var authBloc = MyApp.of(context)?.authBloc;
       // Hien pop-up loading...
-      LoadingDialog.showLoadingDialog(context, 'Loading...');
+      LoadingDialog.showLoadingDialog(context, 'Đang tải...');
       authBloc!.signIn(email, pass, () {
         // Luu thong tin dang nhap
         PreferenceUtils.setBool(PreferenceUtils.keyIsLogin, true);

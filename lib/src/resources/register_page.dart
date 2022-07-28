@@ -18,7 +18,6 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   //show password
   bool _obscureText = true;
-
   //
   final AuthBloc authBloc = AuthBloc();
   final TextEditingController _nameController = TextEditingController();
@@ -47,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
         elevation: 0.0,
       ),
       body: Container(
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         constraints: const BoxConstraints.expand(),
         color: Colors.white,
         child: SingleChildScrollView(
@@ -100,6 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _phoneController,
                         textInputAction: TextInputAction.next,
                         keyboardType: TextInputType.number,
+                        maxLength: 10,
                         decoration: InputDecoration(
                             errorText: snapshot.hasError
                                 ? snapshot.error.toString()
@@ -113,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     }),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                 child: StreamBuilder(
                     stream: authBloc.emailStream,
                     builder: (context, snapshot) {
@@ -215,7 +215,7 @@ class _RegisterPageState extends State<RegisterPage> {
         _emailController.text, _passController.text);
     if (isValid) {
       // loading dialog
-      LoadingDialog.showLoadingDialog(context, 'Loading...');
+      LoadingDialog.showLoadingDialog(context, 'Đang tải...');
       // create sing up
       authBloc.signUp(_emailController.text, _passController.text,
           _phoneController.text, _nameController.text, () {

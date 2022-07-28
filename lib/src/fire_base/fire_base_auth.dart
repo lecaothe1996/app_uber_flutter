@@ -29,7 +29,7 @@ class FirAuth {
       onSuccess();
     }).catchError((err) {
       // error
-      onRegisterError('Signup fail, please try again');
+      onRegisterError('Đăng ký không thành công, vui lòng thử lại');
     });
   }
 
