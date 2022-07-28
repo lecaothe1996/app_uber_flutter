@@ -13,24 +13,35 @@ class _HomeMenuState extends State<HomeMenu> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      // padding: EdgeInsets.zero,
+      padding: EdgeInsets.zero,
       children: [
-        ListTile(
-          leading: Padding(
-            padding: EdgeInsets.only(left: 15),
-            child: Icon(
-              Icons.person_outline,
+        UserAccountsDrawerHeader(
+            currentAccountPicture: CircleAvatar(
+              child: ClipOval(child: Image.asset('ic_user.png')),
+            ),
+            decoration: BoxDecoration(
               color: Colors.blue,
+              image: DecorationImage(
+                  image: AssetImage('bgr_user.png'), fit: BoxFit.fill),
             ),
-          ),
-          title: Text(
-            'Thông tin của tôi',
-            style: TextStyle(
-              fontSize: 18,
-              color: Color(0xff323643)
+            accountName: Text(
+              'Họ Và Tên',
+              style: TextStyle(fontSize: 18),
             ),
-          ),
-        ),
+            accountEmail: Text('lecaothe@gmail.com')),
+        // ListTile(
+        //   leading: Padding(
+        //     padding: EdgeInsets.only(left: 15),
+        //     child: Icon(
+        //       Icons.person_outline,
+        //       color: Colors.blue,
+        //     ),
+        //   ),
+        //   title: Text(
+        //     'Thông tin của tôi',
+        //     style: TextStyle(fontSize: 18, color: Color(0xff323643)),
+        //   ),
+        // ),
         ListTile(
           leading: Padding(
             padding: const EdgeInsets.only(left: 15),
@@ -41,10 +52,7 @@ class _HomeMenuState extends State<HomeMenu> {
           ),
           title: Text(
             'Lịch sử đi xe',
-            style: TextStyle(
-                fontSize: 18,
-                color: Color(0xff323643)
-            ),
+            style: TextStyle(fontSize: 18, color: Color(0xff323643)),
           ),
         ),
         ListTile(
@@ -57,10 +65,7 @@ class _HomeMenuState extends State<HomeMenu> {
           ),
           title: Text(
             'Ưu đãi',
-            style: TextStyle(
-                fontSize: 18,
-                color: Color(0xff323643)
-            ),
+            style: TextStyle(fontSize: 18, color: Color(0xff323643)),
           ),
         ),
         ListTile(
@@ -73,12 +78,23 @@ class _HomeMenuState extends State<HomeMenu> {
           ),
           title: Text(
             'Thông báo',
-            style: TextStyle(
-                fontSize: 18,
-                color: Color(0xff323643)
+            style: TextStyle(fontSize: 18, color: Color(0xff323643)),
+          ),
+          trailing: ClipOval(
+            child: Container(
+              width: 18,
+              height: 18,
+              color: Colors.red,
+              child: Center(
+                child: Text(
+                  '8',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ),
         ),
+        Divider(),
         ListTile(
           leading: Padding(
             padding: const EdgeInsets.only(left: 15),
@@ -89,10 +105,7 @@ class _HomeMenuState extends State<HomeMenu> {
           ),
           title: Text(
             'Trợ giúp & Hỗ trợ',
-            style: TextStyle(
-                fontSize: 18,
-                color: Color(0xff323643)
-            ),
+            style: TextStyle(fontSize: 18, color: Color(0xff323643)),
           ),
         ),
         ListTile(
@@ -110,10 +123,7 @@ class _HomeMenuState extends State<HomeMenu> {
           ),
           title: Text(
             'Đăng xuất',
-            style: TextStyle(
-                fontSize: 18,
-                color: Color(0xff323643)
-            ),
+            style: TextStyle(fontSize: 18, color: Color(0xff323643)),
           ),
         ),
       ],
