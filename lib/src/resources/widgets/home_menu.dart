@@ -27,9 +27,14 @@ class _HomeMenuState extends State<HomeMenu> {
             image: DecorationImage(
                 image: AssetImage('bgr_user.png'), fit: BoxFit.fill),
           ),
-          accountName: Text(
-            'Họ Và Tên',
-            style: TextStyle(fontSize: 18),
+          accountName: FutureBuilder<String?>(
+            future: authBloc.getUserName(),
+            builder: (context, snapshot) {
+              return Text(
+                snapshot.data.toString(),
+                style: TextStyle(fontSize: 18),
+              );
+            },
           ),
           accountEmail: FutureBuilder<String?>(
             future: authBloc.getCurrentUserEmail(),

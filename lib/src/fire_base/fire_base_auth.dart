@@ -4,17 +4,33 @@ import 'package:firebase_database/firebase_database.dart';
 class FirAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  Future<String?> getUserName() async {
+    try {
+      User? cuser = await _firebaseAuth.currentUser;
+      // print('User cuser: ${cuser}');
+      DatabaseReference ref =
+      FirebaseDatabase.instance.ref("users/${cuser!.uid}/name");
+      // Get the data once
+      DatabaseEvent event = await ref.once();
+      // Print the data of the snapshot
+      // print('UserName: ${event.snapshot.value}');
+      return event.snapshot.value.toString();
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+    }
+  }
+
   Future<String?> getCurrentUserEmail() async {
     try {
       // get userEmail
       final userEmail = await _firebaseAuth.currentUser?.email;
-      print('User Email: ${userEmail}');
+      // print('User Email: ${userEmail}');
       return userEmail;
-
-    } on FirebaseAuthException catch  (e) {
-      print('Failed get userEmail: ${e.code}');
+    } on FirebaseAuthException catch (e) {
+      // print('Failed get userEmail: ${e.code}');
       print(e.message);
     }
+    return null;
   }
 
   void signUp(String email, String pass, String name, String phone,
@@ -80,10 +96,13 @@ class FirAuth {
 
   Future resetPass(String email, Function onSuccess,
       Function(String) onForgotPasswordError) async {
-    await _firebaseAuth.sendPasswordResetEmail(email: email.trim()).then((user) {
+    await _firebaseAuth
+        .sendPasswordResetEmail(email: email.trim())
+        .then((user) {
       // print('========= on resetPass in success');
 
-      onSuccess('Liên kết đặt lại mật khẩu đã được gửi! Kiểm tra Email của bạn.');
+      onSuccess(
+          'Liên kết đặt lại mật khẩu đã được gửi! Kiểm tra Email của bạn.');
     }).catchError((err) {
       onForgotPasswordError('Email không đúng, vui lòng thử lại.');
     });

@@ -66,6 +66,12 @@ class AuthBloc {
     return _firAuthen.getCurrentUserEmail();
   }
 
+  Future<String?> getUserName() async {
+    _firAuthen.getUserName();
+    // print('User Name bloc: ${_firAuthen.getUserName()}');
+    return _firAuthen.getUserName();
+  }
+
   void dispose() {
     _nameController.close();
     _phoneController.close();
