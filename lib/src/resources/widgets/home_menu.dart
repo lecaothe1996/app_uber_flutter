@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/resources/login_page.dart';
 import '../../blocs/PreferenceUtils.dart';
+import '../../blocs/auth_bloc.dart';
 
 class HomeMenu extends StatefulWidget {
   const HomeMenu({Key? key}) : super(key: key);
@@ -10,38 +11,33 @@ class HomeMenu extends StatefulWidget {
 }
 
 class _HomeMenuState extends State<HomeMenu> {
+  final AuthBloc authBloc = AuthBloc();
+
   @override
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
         UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(child: Image.asset('ic_user.png')),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              image: DecorationImage(
-                  image: AssetImage('bgr_user.png'), fit: BoxFit.fill),
-            ),
-            accountName: Text(
-              'Họ Và Tên',
-              style: TextStyle(fontSize: 18),
-            ),
-            accountEmail: Text('lecaothe@gmail.com')),
-        // ListTile(
-        //   leading: Padding(
-        //     padding: EdgeInsets.only(left: 15),
-        //     child: Icon(
-        //       Icons.person_outline,
-        //       color: Colors.blue,
-        //     ),
-        //   ),
-        //   title: Text(
-        //     'Thông tin của tôi',
-        //     style: TextStyle(fontSize: 18, color: Color(0xff323643)),
-        //   ),
-        // ),
+          currentAccountPicture: CircleAvatar(
+            child: ClipOval(child: Image.asset('ic_user.png')),
+          ),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            image: DecorationImage(
+                image: AssetImage('bgr_user.png'), fit: BoxFit.fill),
+          ),
+          accountName: Text(
+            'Họ Và Tên',
+            style: TextStyle(fontSize: 18),
+          ),
+          accountEmail: FutureBuilder<String?>(
+            future: authBloc.getCurrentUserEmail(),
+            builder: (context, snapshot) {
+              return Text(snapshot.data.toString());
+            },
+          ),
+        ),
         ListTile(
           leading: Padding(
             padding: const EdgeInsets.only(left: 15),

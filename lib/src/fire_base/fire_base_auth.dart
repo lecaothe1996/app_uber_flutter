@@ -1,10 +1,21 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class FirAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future<String?> getCurrentUserEmail() async {
+    try {
+      // get userEmail
+      final userEmail = await _firebaseAuth.currentUser?.email;
+      print('User Email: ${userEmail}');
+      return userEmail;
+
+    } on FirebaseAuthException catch  (e) {
+      print('Failed get userEmail: ${e.code}');
+      print(e.message);
+    }
+  }
 
   void signUp(String email, String pass, String name, String phone,
       Function onSuccess, Function(String) onRegisterError) {

@@ -50,12 +50,20 @@ class AuthBloc {
     _firAuthen.signUp(email, pass, name, phone, onSuccess, onRegisterError);
   }
 
-  void signIn(String email, String pass, Function onSuccess, Function(String) onSignInError) {
+  void signIn(String email, String pass, Function onSuccess,
+      Function(String) onSignInError) {
     _firAuthen.signIn(email, pass, onSuccess, onSignInError);
   }
 
-  void resetPass(String email, Function onSuccess, Function(String) onForgotPasswordError) {
+  void resetPass(String email, Function onSuccess,
+      Function(String) onForgotPasswordError) {
     _firAuthen.resetPass(email, onSuccess, onForgotPasswordError);
+  }
+
+  Future<String?> getCurrentUserEmail() async {
+    _firAuthen.getCurrentUserEmail();
+    // print('User Email bloc: ${_firAuthen.getCurrentUserEmail()}');
+    return _firAuthen.getCurrentUserEmail();
   }
 
   void dispose() {
@@ -64,5 +72,4 @@ class AuthBloc {
     _emailController.close();
     _passController.close();
   }
-
 }

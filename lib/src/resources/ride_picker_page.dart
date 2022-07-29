@@ -96,7 +96,7 @@ class _RidePickerPageState extends State<RidePickerPage> {
                             child: CircularProgressIndicator(),
                           );
                         }
-                        print('snapshot: 2');
+                        print('snapshot 1:');
                         print(snapshot.data);
                         // List<PlaceItemRes> places = snapshot.data;
                         List<PlaceItemRes>? places = snapshot.data;

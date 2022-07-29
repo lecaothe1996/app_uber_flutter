@@ -9,7 +9,6 @@ class PlaceBloc {
 
   void searchPlace(String keyword) {
     // print("key nhap vao: " + keyword);
-
     _placeController.sink.add([]);
 
     PlaceService.searchPlace(keyword).then((rs) {
