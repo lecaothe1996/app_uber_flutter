@@ -19,8 +19,31 @@ class _HomeMenuState extends State<HomeMenu> {
       padding: EdgeInsets.zero,
       children: [
         UserAccountsDrawerHeader(
-          currentAccountPicture: CircleAvatar(
-            child: ClipOval(child: Image.asset('ic_user.png')),
+          currentAccountPicture: Stack(
+            fit: StackFit.expand,
+            children: [
+              CircleAvatar(
+                child: ClipOval(child: Image.asset('ic_user.png')),
+              ),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: FlatButton(
+                    padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      color: Colors.grey,
+                      onPressed: () {
+                      print('click image');
+                      authBloc.getImage();
+                      },
+                      child: Icon(Icons.camera_alt_outlined, size: 16, color: Colors.white,)),
+                ),
+              ),
+            ],
           ),
           decoration: BoxDecoration(
             color: Colors.blue,

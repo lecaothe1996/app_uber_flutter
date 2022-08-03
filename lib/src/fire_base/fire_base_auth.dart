@@ -1,8 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:image_picker/image_picker.dart';
 
 class FirAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  Future getImage() async {
+    // Pick an image
+    final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    print('Image picker: $image');
+  }
 
   Future<String?> getUserName() async {
     try {

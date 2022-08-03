@@ -72,6 +72,11 @@ class AuthBloc {
     return _firAuthen.getUserName();
   }
 
+  Future getImage() async {
+    _firAuthen.getImage();
+    return _firAuthen.getUserName();
+  }
+
   void dispose() {
     _nameController.close();
     _phoneController.close();
