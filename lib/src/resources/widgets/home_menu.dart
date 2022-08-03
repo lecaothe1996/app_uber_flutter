@@ -32,23 +32,25 @@ class _HomeMenuState extends State<HomeMenu> {
                   width: 25,
                   height: 25,
                   child: FlatButton(
-                    padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                       color: Colors.grey,
                       onPressed: () {
-                      print('click image');
-                      authBloc.getImage();
+                        print('click image');
+                        authBloc.getImage();
                       },
-                      child: Icon(Icons.camera_alt_outlined, size: 16, color: Colors.white,)),
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        size: 16,
+                        color: Colors.white,
+                      )),
                 ),
               ),
             ],
           ),
           decoration: BoxDecoration(
             color: Colors.blue,
-            image: DecorationImage(
-                image: AssetImage('bgr_user.png'), fit: BoxFit.fill),
+            image: DecorationImage(image: AssetImage('bgr_user.png'), fit: BoxFit.fill),
           ),
           accountName: FutureBuilder<String?>(
             future: authBloc.getUserName(),
@@ -134,8 +136,7 @@ class _HomeMenuState extends State<HomeMenu> {
         ),
         ListTile(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LoginPage()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
             PreferenceUtils.clearData();
           },
           leading: Padding(

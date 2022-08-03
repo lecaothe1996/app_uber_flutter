@@ -74,7 +74,7 @@ class AuthBloc {
 
   Future getImage() async {
     _firAuthen.getImage();
-    return _firAuthen.getUserName();
+    return _firAuthen.getImage();
   }
 
   void dispose() {
