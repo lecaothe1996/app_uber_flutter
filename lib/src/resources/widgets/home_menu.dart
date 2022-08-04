@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:uber_app/src/resources/dialog/loading_dialog.dart';
 import 'package:uber_app/src/resources/login_page.dart';
 import '../../blocs/PreferenceUtils.dart';
 import '../../blocs/auth_bloc.dart';
+import '../dialog/msg_dialog.dart';
 
 class HomeMenu extends StatefulWidget {
   const HomeMenu({Key? key}) : super(key: key);
@@ -23,7 +25,19 @@ class _HomeMenuState extends State<HomeMenu> {
             fit: StackFit.expand,
             children: [
               CircleAvatar(
-                child: ClipOval(child: Image.asset('ic_user.png')),
+                child: ClipOval(
+                  child: FutureBuilder<String?>(
+                    future: authBloc.getImage(),
+                    builder: (context, snapshot) {
+                      print('Image: ${snapshot.data.toString()}');
+                      if (snapshot.hasData) {
+                        // LoadingDialog.hideLoadingDialog(context);
+                        return Image.network(snapshot.data.toString());
+                      }
+                      return Image.asset('ic_user.png');
+                    },
+                  ),
+                ),
               ),
               Positioned(
                 right: 0,
@@ -37,7 +51,8 @@ class _HomeMenuState extends State<HomeMenu> {
                       color: Colors.grey,
                       onPressed: () {
                         print('click image');
-                        authBloc.getImage();
+                        authBloc.upLoadImage();
+                        // LoadingDialog.showLoadingDialog(context, "Đang tải...");
                       },
                       child: Icon(
                         Icons.camera_alt_outlined,

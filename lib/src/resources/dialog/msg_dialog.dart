@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../blocs/auth_bloc.dart';
+
 class MsgDialog {
   static void showMsgDialog(BuildContext context, String title, String msg) {
     showDialog(

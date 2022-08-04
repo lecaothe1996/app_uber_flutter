@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:uber_app/src/fire_base/fire_base_auth.dart';
 
 class AuthBloc {
@@ -72,9 +74,14 @@ class AuthBloc {
     return _firAuthen.getUserName();
   }
 
-  Future getImage() async {
+  Future<String?> getImage() async {
     _firAuthen.getImage();
     return _firAuthen.getImage();
+  }
+
+  Future upLoadImage() async {
+    _firAuthen.upLoadImage();
+    return _firAuthen.upLoadImage();
   }
 
   void dispose() {

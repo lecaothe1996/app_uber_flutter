@@ -8,52 +8,37 @@ import 'package:image_picker/image_picker.dart';
 class FirAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future getImage() async {
-    // Pick an image
-    final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    print('Image picker: ${image?.name}');
+  Future upLoadImage() async {
+    try {
+      // Pick an image
+      final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      print('Image picker: $image');
+      //get Uid User
+      User? cuser = await _firebaseAuth.currentUser;
+      // Create a storage reference from our app
+      final storageRef = FirebaseStorage.instance.ref();
+      // Create a reference to "mountains.jpg"
+      final mountainsRef = storageRef.child("users/${cuser!.uid}/images/${image!.name}");
+      // print('Image mountainsRef: ${mountainsRef}');
+      await mountainsRef.putFile(File(image.path));
+    } on FirebaseAuthException catch (e) {
+      print('loi up load image: ${e.message}');
+    }
   }
 
-  Future upLoadImage(XFile image) async {
-    // Create a storage reference from our app
-    final storageRef = FirebaseStorage.instance.ref();
-
-// Create a reference to "mountains.jpg"
-    final mountainsRef = storageRef.child(image.name);
-
+  Future<String?> getImage() async {
     try {
-      await mountainsRef.putFile(File(image.path)).snapshotEvents.listen((taskSnapshot) {
-        switch (taskSnapshot.state) {
-          case TaskState.running:
-            // loading image
-            // final progress = 100.0 * (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes);
-            // print("Upload is $progress% complete.");
-            break;
-          case TaskState.paused:
-            // ...
-            print('paused ${taskSnapshot.metadata?.size}');
-            break;
-          case TaskState.success:
-            // ...
-            print('success ${taskSnapshot.metadata?.size}');
-            // _timne.cancel();
-            break;
-          case TaskState.canceled:
-            // ...
-            break;
-          case TaskState.error:
-            // ...
-            print('error ${taskSnapshot.totalBytes}');
-            break;
-        }
-      });
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
-    }
+      User? cuser = await _firebaseAuth.currentUser;
+      // print('User cuser: ${cuser}');
+      final storageRef = FirebaseStorage.instance.ref();
 
-    final downurl = await mountainsRef.getDownloadURL();
-    final url = downurl.toString();
-    print('error $url');
+      final imageUrl = await storageRef.root.child("users/${cuser!.uid}/images/image_picker5247893648024131719.jpg").getDownloadURL();
+
+      print('url image: ${imageUrl.toString()}');
+      return imageUrl.toString();
+    } on FirebaseAuthException catch (e) {
+      print('Lỗi get Image: ${e.message}');
+    }
   }
 
   Future<String?> getUserName() async {
@@ -84,8 +69,7 @@ class FirAuth {
     return null;
   }
 
-  void signUp(
-      String email, String pass, String name, String phone, Function onSuccess, Function(String) onRegisterError) {
+  void signUp(String email, String pass, String name, String phone, Function onSuccess, Function(String) onRegisterError) {
     // tạo user
     _firebaseAuth.createUserWithEmailAndPassword(email: email, password: pass).then((user) {
       // tao uer thanh cong
