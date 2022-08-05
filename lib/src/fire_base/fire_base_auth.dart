@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -14,34 +15,27 @@ class FirAuth {
     try {
       // Pick an image
       final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      print('Image 123: ${image!.path}');
       // Crop image
-      if(image != null) {
-        print('Crop Image: ${image.path}');
-
+      if (image != null) {
         final CroppedFile? cropImage = await ImageCropper().cropImage(
           sourcePath: image.path,
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-            CropAspectRatioPreset.ratio3x2,
-            CropAspectRatioPreset.original,
-            CropAspectRatioPreset.ratio4x3,
-            CropAspectRatioPreset.ratio16x9
-          ],
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+          cropStyle: CropStyle.circle,
+          compressQuality: 100,
+          maxHeight: 500,
+          maxWidth: 500,
           uiSettings: [
             AndroidUiSettings(
-                toolbarTitle: 'Cropper',
-                toolbarColor: Colors.deepOrange,
+                toolbarTitle: 'Cắt Ảnh',
+                toolbarColor: Colors.blue,
                 toolbarWidgetColor: Colors.white,
-                initAspectRatio: CropAspectRatioPreset.original,
-                lockAspectRatio: false),
+                initAspectRatio: CropAspectRatioPreset.original,),
             IOSUiSettings(
-              title: 'Cropper',
+              title: 'Cắt Ảnh',
             ),
           ],
         );
-
-        print('Image picker: $cropImage');
+        // print('Image picker: $cropImage');
         //get Uid User
         User? cuser = await _firebaseAuth.currentUser;
         //upload image to firebase storage
@@ -58,12 +52,13 @@ class FirAuth {
       // print('User cuser: ${cuser}');
 
       final imageUrl = await FirebaseStorage.instance.ref("users/${cuser!.uid}/images/${cuser.uid}").getDownloadURL();
-      print('url image: ${imageUrl.toString()}');
+      // print('url image: ${imageUrl.toString()}');
 
       return imageUrl.toString();
     } on FirebaseAuthException catch (e) {
       print('Lỗi get Image: ${e.message}');
     }
+    return null;
   }
 
   Future<String?> getUserName() async {
@@ -77,8 +72,9 @@ class FirAuth {
       // print('UserName: ${event.snapshot.value}');
       return event.snapshot.value.toString();
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      print('Lỗi getUserName: ${e.message}');
     }
+    return null;
   }
 
   Future<String?> getCurrentUserEmail() async {
@@ -89,12 +85,13 @@ class FirAuth {
       return userEmail;
     } on FirebaseAuthException catch (e) {
       // print('Failed get userEmail: ${e.code}');
-      print(e.message);
+      print('Lỗi getCurrentUserEmail: ${e.message}');
     }
     return null;
   }
 
-  void signUp(String email, String pass, String name, String phone, Function onSuccess, Function(String) onRegisterError) {
+  void signUp(
+      String email, String pass, String name, String phone, Function onSuccess, Function(String) onRegisterError) {
     // tạo user
     _firebaseAuth.createUserWithEmailAndPassword(email: email, password: pass).then((user) {
       // tao uer thanh cong

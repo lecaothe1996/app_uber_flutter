@@ -81,7 +81,7 @@ class AuthBloc {
 
   Future upLoadImage() async {
     _firAuthen.upLoadImage();
-    return _firAuthen.upLoadImage();
+    // return _firAuthen.upLoadImage();
   }
 
   void dispose() {

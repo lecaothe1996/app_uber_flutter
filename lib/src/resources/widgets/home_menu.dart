@@ -50,7 +50,7 @@ class _HomeMenuState extends State<HomeMenu> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                       color: Colors.grey,
                       onPressed: () {
-                        print('click image');
+                        // print('click image');
                         authBloc.upLoadImage();
                         // LoadingDialog.showLoadingDialog(context, "Đang tải...");
                       },
