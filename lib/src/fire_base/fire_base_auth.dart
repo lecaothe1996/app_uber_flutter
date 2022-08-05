@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FirAuth {
@@ -12,17 +14,41 @@ class FirAuth {
     try {
       // Pick an image
       final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      print('Image picker: $image');
-      //get Uid User
-      User? cuser = await _firebaseAuth.currentUser;
-      // Create a storage reference from our app
-      final storageRef = FirebaseStorage.instance.ref();
-      // Create a reference to "mountains.jpg"
-      final mountainsRef = storageRef.child("users/${cuser!.uid}/images/${image!.name}");
-      // print('Image mountainsRef: ${mountainsRef}');
-      await mountainsRef.putFile(File(image.path));
+      print('Image 123: ${image!.path}');
+      // Crop image
+      if(image != null) {
+        print('Crop Image: ${image.path}');
+
+        final CroppedFile? cropImage = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+            CropAspectRatioPreset.ratio3x2,
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.ratio4x3,
+            CropAspectRatioPreset.ratio16x9
+          ],
+          uiSettings: [
+            AndroidUiSettings(
+                toolbarTitle: 'Cropper',
+                toolbarColor: Colors.deepOrange,
+                toolbarWidgetColor: Colors.white,
+                initAspectRatio: CropAspectRatioPreset.original,
+                lockAspectRatio: false),
+            IOSUiSettings(
+              title: 'Cropper',
+            ),
+          ],
+        );
+
+        print('Image picker: $cropImage');
+        //get Uid User
+        User? cuser = await _firebaseAuth.currentUser;
+        //upload image to firebase storage
+        await FirebaseStorage.instance.ref("users/${cuser!.uid}/images/${cuser.uid}").putFile(File(cropImage!.path));
+      }
     } on FirebaseAuthException catch (e) {
-      print('loi up load image: ${e.message}');
+      print('loi upload image: ${e.message}');
     }
   }
 
@@ -30,11 +56,10 @@ class FirAuth {
     try {
       User? cuser = await _firebaseAuth.currentUser;
       // print('User cuser: ${cuser}');
-      final storageRef = FirebaseStorage.instance.ref();
 
-      final imageUrl = await storageRef.root.child("users/${cuser!.uid}/images/image_picker5247893648024131719.jpg").getDownloadURL();
-
+      final imageUrl = await FirebaseStorage.instance.ref("users/${cuser!.uid}/images/${cuser.uid}").getDownloadURL();
       print('url image: ${imageUrl.toString()}');
+
       return imageUrl.toString();
     } on FirebaseAuthException catch (e) {
       print('Lỗi get Image: ${e.message}');

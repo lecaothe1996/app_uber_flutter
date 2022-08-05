@@ -29,7 +29,7 @@ class _HomeMenuState extends State<HomeMenu> {
                   child: FutureBuilder<String?>(
                     future: authBloc.getImage(),
                     builder: (context, snapshot) {
-                      print('Image: ${snapshot.data.toString()}');
+                      // print('Image: ${snapshot.data.toString()}');
                       if (snapshot.hasData) {
                         // LoadingDialog.hideLoadingDialog(context);
                         return Image.network(snapshot.data.toString());
