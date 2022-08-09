@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:uber_app/src/resources/dialog/loading_dialog.dart';
 import 'package:uber_app/src/resources/login_page.dart';
@@ -14,7 +15,12 @@ class HomeMenu extends StatefulWidget {
 
 class _HomeMenuState extends State<HomeMenu> {
   final AuthBloc authBloc = AuthBloc();
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    authBloc.getImage();
+  }
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -25,14 +31,22 @@ class _HomeMenuState extends State<HomeMenu> {
             fit: StackFit.expand,
             children: [
               CircleAvatar(
+                backgroundColor: Colors.white,
                 child: ClipOval(
-                  child: FutureBuilder<String?>(
-                    future: authBloc.getImage(),
+                  child: StreamBuilder<String?>(
+                    stream: authBloc.avatarCrl,
                     builder: (context, snapshot) {
-                      // print('Image: ${snapshot.data.toString()}');
                       if (snapshot.hasData) {
                         // LoadingDialog.hideLoadingDialog(context);
-                        return Image.network(snapshot.data.toString());
+                        print('Image URL: ${snapshot.data.toString()}');
+                        return CachedNetworkImage(
+                          imageUrl: snapshot.data.toString(),
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.deepOrangeAccent,
+                          ),
+                        );
                       }
                       return Image.asset('ic_user.png');
                     },
@@ -51,8 +65,7 @@ class _HomeMenuState extends State<HomeMenu> {
                       color: Colors.grey,
                       onPressed: () {
                         // print('click image');
-                        authBloc.upLoadImage();
-                        // LoadingDialog.showLoadingDialog(context, "Đang tải...");
+                        authBloc.avatarImage();
                       },
                       child: Icon(
                         Icons.camera_alt_outlined,

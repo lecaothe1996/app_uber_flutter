@@ -11,6 +11,9 @@ class AuthBloc {
   final StreamController _emailController = StreamController();
   final StreamController _passController = StreamController();
 
+  var _avatarController = StreamController<String>();
+  Stream<String> get avatarCrl => _avatarController.stream;
+
   Stream get nameStream => _nameController.stream;
 
   Stream get phoneStream => _phoneController.stream;
@@ -74,14 +77,20 @@ class AuthBloc {
     return _firAuthen.getUserName();
   }
 
-  Future<String?> getImage() async {
-    _firAuthen.getImage();
-    return _firAuthen.getImage();
+  // Future<String?> getImage() async {
+  //   _firAuthen.getImage();
+  //   return _firAuthen.getImage();
+  // }
+  void getImage() {
+    _firAuthen.getImage().then((value) {
+      _avatarController.sink.add(value ?? "");
+    });
   }
-
-  Future upLoadImage() async {
-    _firAuthen.upLoadImage();
-    // return _firAuthen.upLoadImage();
+  void avatarImage() {
+    _firAuthen.upLoadImage().then((value) {
+      print('value: $value');
+      _avatarController.sink.add(value ?? "");
+    });
   }
 
   void dispose() {

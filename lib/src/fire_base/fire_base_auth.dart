@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 class FirAuth {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future upLoadImage() async {
+  Future<String?> upLoadImage() async {
     try {
       // Pick an image
       final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -40,6 +40,9 @@ class FirAuth {
         User? cuser = await _firebaseAuth.currentUser;
         //upload image to firebase storage
         await FirebaseStorage.instance.ref("users/${cuser!.uid}/images/${cuser.uid}").putFile(File(cropImage!.path));
+        final imageUrl = await FirebaseStorage.instance.ref("users/${cuser.uid}/images/${cuser.uid}").getDownloadURL();
+        print('image url updated: ${imageUrl.toString()}');
+        return imageUrl;
       }
     } on FirebaseAuthException catch (e) {
       print('loi upload image: ${e.message}');

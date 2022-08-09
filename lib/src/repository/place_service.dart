@@ -12,10 +12,10 @@ class PlaceService {
             "&language=vi&region=VN&query=" +
             Uri.encodeQueryComponent(keyword);
 
-    print("search >>: " + url);
+    // print("search >>: " + url);
     var res = await http.get(Uri.parse(url));
     if (res.statusCode == 200) {
-      print("searchPlace  >> res.body : " + res.body);
+      // print("searchPlace  >> res.body : " + res.body);
       return PlaceItemRes.fromJson(json.decode(res.body));
     } else {
       return [];
