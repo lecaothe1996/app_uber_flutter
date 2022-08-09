@@ -38,13 +38,11 @@ class _RidePickerState extends State<RidePicker> {
               onPressed: () {
                 print('click To');
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        RidePickerPage(toAddress == null ? "" : toAddress!.name,
-                                (place, isFrom) {
-                              widget.onSelected(place, isFrom);
-                              toAddress = place;
-                              setState(() {});
-                            }, false)));
+                    builder: (context) => RidePickerPage(toAddress == null ? "" : toAddress!.name, (place, isFrom) {
+                          widget.onSelected(place, isFrom);
+                          toAddress = place;
+                          setState(() {});
+                        }, false)));
               },
               child: SizedBox(
                 width: double.infinity,
@@ -56,8 +54,7 @@ class _RidePickerState extends State<RidePicker> {
                       width: 10,
                       height: 50,
                       child: Center(
-                        child:
-                        Icon(Icons.location_on, color: Colors.red),
+                        child: Icon(Icons.location_on, color: Colors.red),
                       ),
                     ),
                     Positioned(
@@ -90,9 +87,7 @@ class _RidePickerState extends State<RidePicker> {
               onPressed: () {
                 print('click from');
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => RidePickerPage(
-                            fromAddress == null ? "" : fromAddress!.name,
-                            (place, isFrom) {
+                    builder: (context) => RidePickerPage(fromAddress == null ? "" : fromAddress!.name, (place, isFrom) {
                           widget.onSelected(place, isFrom);
                           fromAddress = place;
                           setState(() {});

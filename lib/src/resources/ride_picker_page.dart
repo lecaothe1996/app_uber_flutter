@@ -47,8 +47,7 @@ class _RidePickerPageState extends State<RidePickerPage> {
                         height: 60,
                         child: Center(
                           child: widget._isFromAddress
-                              ? Icon(Icons.navigation_outlined,
-                                  color: Colors.blue)
+                              ? Icon(Icons.navigation_outlined, color: Colors.blue)
                               : Icon(Icons.location_on, color: Colors.red),
                         ),
                       ),
@@ -88,17 +87,12 @@ class _RidePickerPageState extends State<RidePickerPage> {
                 child: StreamBuilder<List<PlaceItemRes>>(
                     stream: placeBloc.placeStream,
                     builder: (context, snapshot) {
-                      print('snapshot:');
-                      print(snapshot.data.toString());
                       if (snapshot.hasData) {
                         if ((snapshot.data?.length ?? 0) < 1) {
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         }
-                        print('snapshot 1:');
-                        print(snapshot.data);
-                        // List<PlaceItemRes> places = snapshot.data;
                         List<PlaceItemRes>? places = snapshot.data;
                         return ListView.separated(
                             shrinkWrap: true,
@@ -109,8 +103,7 @@ class _RidePickerPageState extends State<RidePickerPage> {
                                 onTap: () {
                                   print("click ListTile");
                                   Navigator.of(context).pop();
-                                  widget.onSelected(places.elementAt(index),
-                                      widget._isFromAddress);
+                                  widget.onSelected(places.elementAt(index), widget._isFromAddress);
                                 },
                               );
                             },
